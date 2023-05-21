@@ -16,8 +16,6 @@ const SidebarItemCollapse = ({ item, index }) => {
     <>
       <ListItemButton
         key={index}
-        // component={Link}
-        // to={item.path}
         onClick={() => setOpen(!open)}
         sx={{
           "&: hover": {

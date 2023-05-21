@@ -18,7 +18,7 @@ const SideBarItem = ({ item, index }) => {
             location.pathname === item.path
               ? "#2CA9E3"
               : colorConfigs.sidebar.bg,
-          flex: 1,
+          flex: 8,
         }}
       />
       <ListItemButton
@@ -31,7 +31,7 @@ const SideBarItem = ({ item, index }) => {
           },
           paddingY: "12px",
           paddingX: "24px",
-          flex: 50,
+          flex: 292,
           backgroundColor:
             location.pathname === item.path
               ? colorConfigs.sidebar.activeBg
