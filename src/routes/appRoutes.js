@@ -10,7 +10,7 @@ import AnalyticsPage from '../pages/dashboard/AnalyticsPage';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
-import MapChannels from '../pages/montages/MapChannelsPage';
+import MapChannels from '../pages/montages/MapChannels/MapChannelsPage';
 import PreviewConfigPage from '../pages/montages/PreviewConfigPage';
 import MontagesRoot from '../pages/montages/MontagesRoot';
 

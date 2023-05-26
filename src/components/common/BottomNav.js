@@ -12,9 +12,6 @@ const BottomNav = () => {
   const navigate = useNavigate();
 
 
-  const triggerSubmitHandler = () => {
-    return "/montages/previewconfig";
-  };
 
   const showBackButton = () => {
     // Check if in first montages Page
@@ -57,92 +54,93 @@ const BottomNav = () => {
   };
 
   return (
-      <BottomNavigation
+    <BottomNavigation
+      sx={{
+        position: "fixed",
+        bottom: "0",
+        left: sizeConfigs.sidebar.width,
+        height: "112px",
+        width: `calc(100% - ${sizeConfigs.sidebar.width})`,
+        p: "56px 23px",
+        boxShadow: "unset",
+        backgroundColor: colorConfigs.topbar.bg,
+        color: colorConfigs.topbar.color,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        zIndex: "999",
+      }}
+    >
+      <Box
         sx={{
-          position: "fixed",
-          bottom: "0",
-          left: sizeConfigs.sidebar.width,
-          height: "112px",
-          width: `calc(100% - ${sizeConfigs.sidebar.width})`,
-          p: "56px 23px",
-          boxShadow: "unset",
-          backgroundColor: colorConfigs.topbar.bg,
-          color: colorConfigs.topbar.color,
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "space-evenly",
         }}
       >
-        <Box
+        {showBackButton()}
+        <Button
           sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-evenly",
+            ml: "32px",
+            textTransform: "capitalize",
+            "&:hover": {
+              backgroundColor: "#fff",
+            },
           }}
         >
-          {showBackButton()}
-          <Button
+          <Typography
             sx={{
-              textTransform: "capitalize",
-              "&:hover": {
-                backgroundColor: "#fff",
-              },
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "26px",
+              textAlign: "center",
+              color: "#959595",
             }}
           >
-            <Typography
-              sx={{
-                fontWeight: 500,
-                fontSize: "20px",
-                lineHeight: "26px",
-                ml: "32px",
-                textAlign: "center",
-                color: "#959595",
-              }}
-            >
-              Cancel Montage
-            </Typography>
-          </Button>
-        </Box>
-          <Link
-          onClick={()=>{
-            setStep(step+1);
+            Cancel Montage
+          </Typography>
+        </Button>
+      </Box>
+      <Link
+        onClick={() => {
+          setStep(step + 1);
+        }}
+        style={{ textDecoration: "none" }}
+        to={`${
+          location.pathname === "/montages"
+            ? "/montages/mapchannels"
+            : location.pathname.includes("mapchannels")
+            ? "/montages/previewconfig"
+            : "/montages/previewconfig"
+        }`}
+      >
+        <Button
+          variant="contained"
+          sx={{
+            display: "flex",
+            width: "181px",
+            height: "66px",
+            alignItems: "center",
+            p: "10px 32px",
+            justifyContent: "center",
+            background: "#2F7EC7",
+            borderRadius: "8px",
           }}
-            style={{ textDecoration: "none" }}
-            to={`${
-              location.pathname === "/montages"
-                ? "/montages/mapchannels"
-                : location.pathname.includes("mapchannels")
-                ? "/montages/previewconfig"
-                : "/montages/previewconfig"
-            }`}
+        >
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "26px",
+              textAlign: "center",
+              color: " #fff",
+            }}
           >
-            <Button
-              variant="contained"
-              sx={{
-                display: "flex",
-                width: "181px",
-                height: "66px",
-                alignItems: "center",
-                p: "10px 32px",
-                justifyContent: "center",
-                background: "#2F7EC7",
-                borderRadius: "8px",
-              }}
-            >
-              <Typography
-                sx={{
-                  fontWeight: 500,
-                  fontSize: "20px",
-                  lineHeight: "26px",
-                  textAlign: "center",
-                  color: " #fff",
-                }}
-              >
-                Next
-              </Typography>
-            </Button>
-          </Link>
-      </BottomNavigation>
+            Next
+          </Typography>
+        </Button>
+      </Link>
+    </BottomNavigation>
   );
 };
 
