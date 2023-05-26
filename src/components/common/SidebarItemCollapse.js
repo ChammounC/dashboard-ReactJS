@@ -16,6 +16,7 @@ const SidebarItemCollapse = ({ item, index }) => {
     <>
       <ListItemButton
         key={index}
+        
         onClick={() => setOpen(!open)}
         sx={{
           "&: hover": {
@@ -39,9 +40,9 @@ const SidebarItemCollapse = ({ item, index }) => {
           {item.child?.map((route, index) =>
             route.sidebarProps ? (
               route.child ? (
-                <SidebarItemCollapse item={route} index={index} />
+                <SidebarItemCollapse key={index} item={route} index={index} />
               ) : (
-                <SideBarItem item={route} index={index} />
+                <SideBarItem key={index} item={route} index={index} />
               )
             ) : null
           )}

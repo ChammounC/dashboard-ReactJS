@@ -14,10 +14,9 @@ const SideBarItem = ({ item, index }) => {
     >
       <div
         style={{
-          backgroundColor:
-            location.pathname === item.path
-              ? "#2CA9E3"
-              : colorConfigs.sidebar.bg,
+          backgroundColor: location.pathname.includes(item.path)
+            ? "#2CA9E3"
+            : colorConfigs.sidebar.bg,
           flex: 8,
         }}
       />
@@ -32,10 +31,9 @@ const SideBarItem = ({ item, index }) => {
           paddingY: "12px",
           paddingX: "24px",
           flex: 292,
-          backgroundColor:
-            location.pathname === item.path
-              ? colorConfigs.sidebar.activeBg
-              : null,
+          backgroundColor: location.pathname.includes(item.path)
+            ? colorConfigs.sidebar.activeBg
+            : null,
         }}
       >
         <ListItemIcon sx={{ color: colorConfigs.sidebar.color }}>

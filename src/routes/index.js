@@ -22,7 +22,7 @@ const generateRoute = (props) => {
               route.child ? (
                 <PageWrapper>{route.element}</PageWrapper>
               ) : (
-                <PageWrapper state={route.state ?? undefined}>
+                <PageWrapper state={route.state ?? undefined} step={route.step??undefined}>
                   {route.element}
                 </PageWrapper>
               )

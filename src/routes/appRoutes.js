@@ -10,6 +10,9 @@ import AnalyticsPage from '../pages/dashboard/AnalyticsPage';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
+import MapChannels from '../pages/montages/MapChannelsPage';
+import PreviewConfigPage from '../pages/montages/PreviewConfigPage';
+import MontagesRoot from '../pages/montages/MontagesRoot';
 
 const appRoutes = [
   {
@@ -59,12 +62,32 @@ const appRoutes = [
   },
   {
     path: "/montages",
-    element: <MontagesPage />,
+    element: <MontagesRoot />,
     state: "montages",
     sidebarProps: {
       displayText: "Montages",
       icon: <NoteAddOutlinedIcon />,
     },
+    child: [
+      {
+        index: true,
+        element: <MontagesPage />,
+        step: 1,
+        state: "montages.index",
+      },
+      {
+        path: "/montages/mapchannels",
+        element: <MapChannels />,
+        step: 2,
+        state: "montages.mapchannels",
+      },
+      {
+        path: "/montages/previewconfig",
+        element: <PreviewConfigPage />,
+        step: 3,
+        state: "montages.previewconfig",
+      },
+    ],
   },
   {
     path: "/credits",

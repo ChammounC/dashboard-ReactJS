@@ -43,14 +43,14 @@ textAlign= 'center'
               bgcolor: "#4F4F4F",
             }}
           />
-          {appRoutes.map((route, index) =>
-            route.sidebarProps ? (
-              route.child ? (
-                <SidebarItemCollapse item={route} index={index} />
+          {appRoutes.map((route, index) =>{
+            return route.sidebarProps ? (
+              route.child && route.path!=='/montages' ? (
+                <SidebarItemCollapse key={index} item={route} index={index} />
               ) : (
-                <SideBarItem item={route} index={index} />
+                <SideBarItem key={index} item={route} index={index} />
               )
-            ) : null
+            ) : null}
           )}
         </List>
         <Box

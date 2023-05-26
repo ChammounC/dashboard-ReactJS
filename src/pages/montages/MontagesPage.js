@@ -1,11 +1,8 @@
 import { Typography, Box } from "@mui/material";
-import StepProgressBar from "./StepProgress/StepProgressBar";
 import edfLogo from "../../assets/images/edf.svg";
 
 const MontagesPage = (props) => {
   return (
-    <>
-      <StepProgressBar />
       <Box
         sx={{
           mt: "40px",
@@ -13,6 +10,7 @@ const MontagesPage = (props) => {
           backgroundColor: "#fff",
           height: "570px",
           borderRadius: "6px",
+          mb:'112px'
         }}
       >
         <Box
@@ -56,24 +54,22 @@ const MontagesPage = (props) => {
               Browse Files
             </Typography>
           </Box>
-            <Typography
-              sx={{
-                mt: "10px",
-                fontWeight: 500,
-                fontSize: "16px",
-                lineHeight: "21px",
-                color: "#0F0F0F",
-                display:'flex',
-                alignItems:'center',
-                justifyContent:'center'
-              }}
-            >
-              or drop files here
-            </Typography>
+          <Typography
+            sx={{
+              mt: "10px",
+              fontWeight: 500,
+              fontSize: "16px",
+              lineHeight: "21px",
+              color: "#0F0F0F",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            or drop files here
+          </Typography>
         </Box>
       </Box>
-      <Typography>MontagesPage</Typography>
-    </>
   );
 };
 
