@@ -17,8 +17,8 @@ const MapChannels = () => {
   return (
     <>
       <MontageListHeader />
-      {channels.map((channel) => (
-        <ChannelComponent channel={channel} />
+      {channels.map((channel,index) => (
+        <ChannelComponent key={index} channel={channel} />
       ))}
       <Box
         sx={{

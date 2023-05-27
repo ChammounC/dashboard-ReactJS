@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { Box, ListItemText, Toolbar, Typography } from "@mui/material";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -9,13 +9,15 @@ import colorConfigs from "../../configs/colorConfigs";
 import { Outlet, useLocation } from "react-router-dom";
 import BottomNav from "../common/BottomNav";
 import StepProgressBar from "../../pages/montages/StepProgress/StepProgressBar";
-import {StepContext} from '../../context/StepContext';
+import { StepContext } from "../../context/StepContext";
 import { ChannelContext } from "../../context/ChannelContext";
 
 const MainLayout = (props) => {
   const location = useLocation();
-  const [channelData, setChannelData] = useState("");
-  const [step,setStep]=useState(1);
+  const [channelData, setChannelData] = useState([
+    
+  ]);
+  const [step, setStep] = useState(1);
   return (
     <Box sx={{ display: "flex" }}>
       <Box
@@ -80,14 +82,14 @@ const MainLayout = (props) => {
             <ExpandMoreOutlinedIcon />
           </div>
         </Toolbar>
-        <ChannelContext.Provider value={{channelData,setChannelData}}>
-          <StepContext.Provider value={{ step, setStep }}>
-            {location.pathname.includes("/montages") && <StepProgressBar />}
+        <StepContext.Provider value={{ step, setStep }}>
+          {location.pathname.includes("/montages") && <StepProgressBar />}
+          <ChannelContext.Provider value={{ channelData, setChannelData }}>
             <Outlet />
-            <Box sx={{ mb: "100px" }} />
-            {location.pathname.includes("/montages") && <BottomNav />}
-          </StepContext.Provider>
-        </ChannelContext.Provider>
+          </ChannelContext.Provider>
+          <Box sx={{ mb: "100px" }} />
+          {location.pathname.includes("/montages") && <BottomNav />}
+        </StepContext.Provider>
       </Box>
     </Box>
   );

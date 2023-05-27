@@ -2,20 +2,25 @@ import { Box,MenuItem,Button,Typography,FormControl,InputLabel,Select } from "@m
 import { useState } from "react";
 import TrashLogo from '../../assets/images/trash.svg';
 
-const BackupChannel=({onDelete,channelKey})=>{
+const BackupChannel=({onDelete,channelKey,setBackup})=>{
+
+
     const [primaryChannel, setPrimaryChannel] = useState("");
-    const [refChannel, setRefChannel] = useState("1");
+    const [refChannel, setRefChannel] = useState("null");
 
      const handlePrimaryChange = (event) => {
        setPrimaryChannel(event.target.value);
-     };
-     const handleRefChange = (event) => {
-       setRefChannel(event.target.value);
+       setBackup(event.target.value.toUpperCase(),'primary');
+      };
+      const handleRefChange = (event) => {
+        setRefChannel(event.target.value);
+        setBackup(event.target.value.toUpperCase(), "reference");
      };
 
      const deleteBackupChannelHandler=()=>{
         onDelete(channelKey);
      }
+
 
     return (
       <Box
@@ -55,8 +60,8 @@ const BackupChannel=({onDelete,channelKey})=>{
             </InputLabel>
 
             <Select
-              labelId="select-label"
-              id="simple-select"
+              labelId="select-label-backup"
+              id="simple-select-backup"
               value={primaryChannel}
               onChange={handlePrimaryChange}
               sx={{
@@ -66,12 +71,12 @@ const BackupChannel=({onDelete,channelKey})=>{
                 },
               }}
             >
-              <MenuItem value="1">C3</MenuItem>
-              <MenuItem value="2">A2</MenuItem>
-              <MenuItem value="3">EMG</MenuItem>
-              <MenuItem value="4">VDS</MenuItem>
-              <MenuItem value="5">B6</MenuItem>
-              <MenuItem value="6">Y88</MenuItem>
+              <MenuItem value="c3">C3</MenuItem>
+              <MenuItem value="a2">A2</MenuItem>
+              <MenuItem value="emg">EMG</MenuItem>
+              <MenuItem value="vds">VDS</MenuItem>
+              <MenuItem value="b6">B6</MenuItem>
+              <MenuItem value="y88">Y88</MenuItem>
             </Select>
           </FormControl>
         </Box>
@@ -101,13 +106,13 @@ const BackupChannel=({onDelete,channelKey})=>{
                 },
               }}
             >
-              <MenuItem value="1">NULL</MenuItem>
-              <MenuItem value="2">C3</MenuItem>
-              <MenuItem value="3">A2</MenuItem>
-              <MenuItem value="4">EMG</MenuItem>
-              <MenuItem value="5">VDS</MenuItem>
-              <MenuItem value="6">B6</MenuItem>
-              <MenuItem value="7">Y88</MenuItem>
+              <MenuItem value="null">NULL</MenuItem>
+              <MenuItem value="c3">C3</MenuItem>
+              <MenuItem value="a2">A2</MenuItem>
+              <MenuItem value="emg">EMG</MenuItem>
+              <MenuItem value="vds">VDS</MenuItem>
+              <MenuItem value="b6">B6</MenuItem>
+              <MenuItem value="y88">Y88</MenuItem>
             </Select>
           </FormControl>
         </Box>

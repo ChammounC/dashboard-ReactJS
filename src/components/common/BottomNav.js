@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { StepContext } from "../../context/StepContext";
 
 const BottomNav = () => {
-  const {step,setStep} = useContext(StepContext);
+  const {setStep} = useContext(StepContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const BottomNav = () => {
     return (
       <Button
         variant="outlined"
-        onClick={() => {setStep(step - 1);navigate(-1)}}
+        onClick={() => {setStep((prevState)=>prevState-1);navigate(-1)}}
         sx={{
           textTransform: "capitalize",
           width: "181px",
@@ -103,7 +103,7 @@ const BottomNav = () => {
       </Box>
       <Link
         onClick={() => {
-          setStep(step + 1);
+          setStep((prevState)=>prevState+1);
         }}
         style={{ textDecoration: "none" }}
         to={`${

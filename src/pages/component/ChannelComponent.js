@@ -11,9 +11,22 @@ import { useContext, useEffect, useState } from "react";
 import BackupChannel from "./BackupChannel";
 import { ChannelContext } from "../../context/ChannelContext";
 
-const ChannelComponent = ({ channel }) => {
+// {
+//       channel: {
+//         name: "",
+//         primary: "",
+//         reference: "",
+//         backup: [
+//           {
+//             bPrimary: "",
+//             bReference: "NULL",
+//           },
+//         ],
+//       },
+//     },
 
-    const {setChannelData}=useContext(ChannelContext);
+const ChannelComponent = ({ channel }) => {
+  const { channelData, setChannelData } = useContext(ChannelContext);
 
   const [primaryChannel, setPrimaryChannel] = useState("");
   const [refChannel, setRefChannel] = useState("");
@@ -25,15 +38,127 @@ const ChannelComponent = ({ channel }) => {
 
   const handlePrimaryChange = (event) => {
     setPrimaryChannel(event.target.value);
+
+    //Login for storing Primary Channel into ChannelContext
+    setChannelData((prevState) => {
+      if (prevState.length !== 0) {
+        let matchedIndex; // for indexing value of i as .map() returns an array
+        const i = prevState.map((c) => {
+          let index;
+          if (c.channel.name === channel) {
+            index = prevState.findIndex((contextChannel) => {
+              return contextChannel.channel.name === channel;
+            });
+            matchedIndex = index;
+          }
+          return index;
+        });
+
+        // if match found
+        if (matchedIndex !== undefined) {
+          if (i[matchedIndex] !== undefined) {
+            prevState[i[matchedIndex]].channel.primary =
+              event.target.value.toUpperCase();
+            return prevState;
+          }
+        } else {
+          return prevState.concat({
+            channel: {
+              name: channel,
+              primary: event.target.value.toUpperCase(),
+              reference: "",
+              backup: [
+                {
+                  bPrimary: "",
+                  bReference: "NULL",
+                },
+              ],
+            },
+          });
+        }
+      }
+      // need for initial channel Object creation if Reference Channel is first set
+      return prevState.concat({
+        channel: {
+          name: channel,
+          primary: event.target.value.toUpperCase(),
+          reference: "",
+          backup: [
+            {
+              bPrimary: "",
+              bReference: "NULL",
+            },
+          ],
+        },
+      });
+    });
   };
   const handleRefChange = (event) => {
     setRefChannel(event.target.value);
+
+    //Login for storing Reference channel into ChannelContext
+    setChannelData((prevState) => {
+      if (prevState.length !== 0) {
+        let matchedIndex; // for indexing value of i as .map() returns an array
+        const i = prevState.map((c) => {
+          let index;
+          if (c.channel.name === channel) {
+            index = prevState.findIndex((contextChannel) => {
+              return contextChannel.channel.name === channel;
+            });
+            matchedIndex = index;
+          }
+          return index;
+        });
+
+        // if match found
+        if (matchedIndex !== undefined) {
+          if (i[matchedIndex] !== undefined) {
+            prevState[i[matchedIndex]].channel.reference =
+              event.target.value.toUpperCase();
+            return prevState;
+          }
+        } else {
+          return prevState.concat({
+            channel: {
+              name: channel,
+              primary: "",
+              reference: event.target.value.toUpperCase(),
+              backup: [
+                {
+                  bPrimary: "",
+                  bReference: "NULL",
+                },
+              ],
+            },
+          });
+        }
+      }
+      // need for initial channel Object creation if Reference Channel is first set
+      return prevState.concat({
+        channel: {
+          name: channel,
+          primary: event.target.value.toUpperCase(),
+          reference: "",
+          backup: [
+            {
+              bPrimary: "",
+              bReference: "NULL",
+            },
+          ],
+        },
+      });
+    });
   };
 
   const deleteBackupChannelHandler = (channelKey) => {
     setDeleteChannelKey(channelKey);
     setDeleteBackup(true);
   };
+
+  // const setBackup=()=>{
+
+  // }
 
   const onAddBackupChannel = () => {
     setBackupChannel(
@@ -42,6 +167,7 @@ const ChannelComponent = ({ channel }) => {
           key={channel + backupChannel.length}
           onDelete={deleteBackupChannelHandler}
           channelKey={channel + backupChannel.length}
+          // setBackup={}
         />
       )
     );
@@ -54,6 +180,7 @@ const ChannelComponent = ({ channel }) => {
   };
 
   useEffect(() => {
+    // console.log("logging channelData from useEffect:", channelData);
     if (deleteBackup) {
       setDeleteBackup(false);
       const newBackupChannelItem = backupChannel.filter(
@@ -68,7 +195,13 @@ const ChannelComponent = ({ channel }) => {
       return;
     }
     setBackupChannelNotZero(true);
-  }, [backupChannel, deleteBackup, deleteChannelKey,setChannelData]);
+  }, [
+    backupChannel,
+    deleteBackup,
+    deleteChannelKey,
+    setChannelData,
+    channelData,
+  ]);
 
   return (
     <Box marginBottom="24px">
